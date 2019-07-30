@@ -1,0 +1,33 @@
+{
+  "name": "@sesame/react-native-alipay",
+  "title": "React Native Alipay",
+  "version": "0.1.0",
+  "description": "alipay sdk wrapper for react native 0.60+",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sesame-tech/react-native-alipay.git",
+    "baseUrl": "https://github.com/sesame-tech/react-native-alipay.git"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "yyc",
+    "email": "yuanyinchun3@163.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.5.0",
+    "react-native": ">=0.57.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.5.0",
+    "react-native": "^0.59.4"
+  }
+}
