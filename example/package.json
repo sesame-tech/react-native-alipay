@@ -8,6 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@sesame/react-native-alipay": "file:./../",
     "react": "16.8.6",
     "react-native": "0.60.4"
   },
