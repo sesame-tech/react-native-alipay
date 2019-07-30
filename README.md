@@ -1,4 +1,4 @@
-# @sesame/react-native-wechat
+# @sesame/react-native-alipay
 
 Alipay SDK wrapper for react native 0.60+, support iOS and android
 
