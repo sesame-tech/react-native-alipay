@@ -67,6 +67,7 @@ reference: [alipay sdk android integrate guide](https://docs.open.alipay.com/204
 - copy alipaySdk.aar file
 
   from: node_modules/@sesame/react-native-alipay/android/lib/alipaySdk-15.6.5-20190718211148.aar
+  
   to: YOUR-PROJECT/android/app/lib/alipaySdk-15.6.5-20190718211148.aar
   
 - YOUR-PROJECT/android/build.gradle
