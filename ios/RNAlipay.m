@@ -32,20 +32,13 @@ RCT_EXPORT_MODULE()
 
 RCT_REMAP_METHOD(pay,
     order:(NSString *)orderStr
-    scheme:(NSString *)schemeStr
     resolver:(RCTPromiseResolveBlock)resolve
     rejecter:(RCTPromiseRejectBlock)reject)
 {
-    if ([schemeStr isEqualToString:@""]) {
-        NSString *error = @"scheme cannot be empty";
-        reject(@"10000", error, [NSError errorWithDomain:error code:10000 userInfo:NULL]);
-        return;
-    }
-
     _resolve = resolve;
     _reject = reject;
 
-    [[AlipaySDK defaultService] payOrder:orderStr fromScheme:schemeStr callback:^(NSDictionary *resultDic) {
+    [[AlipaySDK defaultService] payOrder:orderStr fromScheme:self.appScheme callback:^(NSDictionary *resultDic) {
         [RNAlipay handleResult:resultDic];
     }];
 }
@@ -67,9 +60,25 @@ RCT_REMAP_METHOD(pay,
     if ([aURL.host isEqualToString:@"safepay"]) {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:aURL standbyCallback:^(NSDictionary *resultDic) {
-            [self handleResult:resultDic];
+            [RNAlipay handleResult:resultDic];
         }];
+        return YES;
+    }else{
+        return NO;
     }
 }
+
+- (NSString *)appScheme {
+    NSArray *urlTypes = NSBundle.mainBundle.infoDictionary[@"CFBundleURLTypes"];
+    for (NSDictionary *urlType in urlTypes) {
+        NSString *urlName = urlType[@"CFBundleURLName"];
+        if ([urlName hasPrefix:@"alipay"]) {
+            NSArray *schemes = urlType[@"CFBundleURLSchemes"];
+            return schemes.firstObject;
+        }
+    }
+    return nil;
+}
+
 
 @end
