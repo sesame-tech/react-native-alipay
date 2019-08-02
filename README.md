@@ -64,7 +64,27 @@ reference: [alipay sdk ios integrate guide](https://docs.open.alipay.com/204/105
 
 reference: [alipay sdk android integrate guide](https://docs.open.alipay.com/204/105296/)
 
-to be done
+- copy alipaySdk.aar file
+
+  from: node_modules/@sesame/react-native-alipay/android/lib/alipaySdk-15.6.5-20190718211148.aar
+  to: YOUR-PROJECT/android/app/lib/alipaySdk-15.6.5-20190718211148.aar
+  
+- YOUR-PROJECT/android/build.gradle
+  
+  add flatDir
+  
+  ```
+    allprojects {
+        repositories {
+            // ...
+            
+            flatDir {
+                dirs "lib"
+            }
+        }
+    }
+  ```
+  
            
     
 

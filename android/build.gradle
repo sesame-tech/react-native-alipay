@@ -51,6 +51,7 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:${safeExtGet('reactnativeVersion', '+')}"
+    compile(name:'alipaySdk-15.6.5-20190718211148', ext:'aar')
 }
 
 def configureReactNativePom(def pom) {
@@ -60,7 +61,7 @@ def configureReactNativePom(def pom) {
         name packageJson.title
         artifactId packageJson.name
         version = packageJson.version
-        group = "com.reactlibrary"
+        group = "cn.net.sesame.alipay"
         description packageJson.description
         url packageJson.repository.baseUrl
 

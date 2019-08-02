@@ -2,6 +2,8 @@
 #
 .DS_Store
 
+*.env
+
 # node.js
 #
 node_modules/

@@ -14,6 +14,22 @@ static RCTPromiseRejectBlock _reject;
 
 RCT_EXPORT_MODULE()
 
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenURL:) name:@"RCTOpenURLNotification" object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 RCT_REMAP_METHOD(pay,
     order:(NSString *)orderStr
     scheme:(NSString *)schemeStr
@@ -44,11 +60,13 @@ RCT_REMAP_METHOD(pay,
     }
 }
 
-+(void) handleCallback:(NSURL *)url
+- (BOOL)handleOpenURL:(NSNotification *)aNotification
 {
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+    NSString * aURLString =  [aNotification userInfo][@"url"];
+    NSURL * aURL = [NSURL URLWithString:aURLString];
+    if ([aURL.host isEqualToString:@"safepay"]) {
+        //跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:aURL standbyCallback:^(NSDictionary *resultDic) {
             [self handleResult:resultDic];
         }];
     }
