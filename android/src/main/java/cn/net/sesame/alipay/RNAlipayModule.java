@@ -89,7 +89,7 @@ public class RNAlipayModule extends ReactContextBaseJavaModule {
 
 					String resultStatus = result.get("resultStatus");
 					if(Integer.valueOf(resultStatus) >= 8000){
-						promise.resolve(result);
+						promise.resolve(resultStatus);
 					}else{
 						promise.reject(new RuntimeException(resultStatus));
 					}

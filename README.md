@@ -126,13 +126,8 @@ import Alipay from '@sesame/react-native-alipay';
 try {
   // get from server, signed
   let orderStr = 'app_id=xxxx&method=alipay.trade.app.pay&charset=utf-8&timestamp=2014-07-24 03:07:50&version=1.0&notify_url=https%3A%2F%2Fapi.xxx.com%2Fnotify&biz_content=%7B%22subject%22%3A%22%E5%A4%A7%E4%B9%90%E9%80%8F%22%2C%22out_trade_no%22%3A%22xxxx%22%2C%22total_amount%22%3A%229.00%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%7D&sign_type=RSA2&sign=xxxx';
-  let response = await Alipay.pay(orderStr);
-  console.info(response);
-
-  let { resultStatus, result, memo } = response;
-  let { code, msg, app_id, out_trade_no, trade_no, total_amount, seller_id, charset, timestamp } = JSON.parse(result);
-
-  // TODO: ...
+  let resultStatus = await Alipay.pay(orderStr);
+  console.info(resultStatus);
 
 } catch (error) {
   console.error(error);
