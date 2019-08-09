@@ -1,7 +1,7 @@
 {
   "name": "@sesame/react-native-alipay",
   "title": "React Native Alipay",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "alipay sdk wrapper for react native 0.60+",
   "main": "index.js",
   "scripts": {

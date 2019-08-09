@@ -5,6 +5,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
 
 import java.util.Map;
 
@@ -87,11 +90,19 @@ public class RNAlipayModule extends ReactContextBaseJavaModule {
 					msg.obj = result;
 					mHandler.sendMessage(msg);
 
-					String resultStatus = result.get("resultStatus");
-					if(Integer.valueOf(resultStatus) >= 8000){
-						promise.resolve(resultStatus);
+					String resultStatusValue = result.get("resultStatus");
+					String resultValue = result.get("result");
+					String memoValue = result.get("memo");
+
+					WritableMap info = Arguments.createMap();
+                    info.putString("resultStatus", resultStatusValue);
+                    info.putString("result", resultValue);
+                    info.putString("memo", memoValue);
+
+					if(Integer.valueOf(resultStatusValue) >= 8000){
+						promise.resolve(info);
 					}else{
-						promise.reject(new RuntimeException(resultStatus));
+						promise.reject(new RuntimeException(resultStatusValue));
 					}
 				} catch (Exception e) {
 					promise.reject(e.getLocalizedMessage(), e);
